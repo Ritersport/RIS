@@ -1,0 +1,18 @@
+version: '2.2'
+services:
+  manager:
+    build: ./Ris_1/
+    ports:
+      - 8090:8080
+    networks: 
+      - manager-workers
+  worker:
+    build: ./Ris_1_worker/
+    networks:
+      - manager-workers
+    deploy:
+      mode: replicated
+      replicas: 1
+      endpoint_mode: dnsrr
+networks:
+  manager-workers:
